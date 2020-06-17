@@ -1,25 +1,33 @@
 const router = require("express").Router();
-const Transaction = require("../public/api");
+const Workout = require("../models/workout");
+const path = require("path");
 
+
+router.get("/ap", function (req, res) {
+
+    res.sendFile(path.join(__dirname, ""));
+  });
 
 router.get("/api/workouts", (req, res) => {
-    Transaction.find({})
+    Workout.find({})
       .sort({ date: -1 })
-      .then(dbTransaction => {
-        res.json(dbTransaction);
+      .then(dbWorkout => {
+        res.json(dbWorkout);
       })
       .catch(err => {
         res.status(400).json(err);
       });
   });
 
-  const id = location.search;
+  
+
+  // const id = location.search;
   
 
 router.put("/api/workouts/:id",  (req, res) => {
-  Transaction.(params.)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+  Workout(req.params.body.id)
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.status(400).json(err);
@@ -29,9 +37,9 @@ router.put("/api/workouts/:id",  (req, res) => {
 });
 
 router.post("/api/workouts/", ({ body }, res) => {
-  Transaction.insertMany(body)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+  Workout.insertMany(body)
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.status(400).json(err);
@@ -39,10 +47,10 @@ router.post("/api/workouts/", ({ body }, res) => {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  Transaction.find({})
+  Workout.find({})
     .sort({ date: -1 })
-    .then(dbTransaction => {
-      res.json(dbTransaction);
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.status(400).json(err);
